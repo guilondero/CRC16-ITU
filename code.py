@@ -68,3 +68,5 @@ def GetCrc16(strHexData):
 		i = i + 2
 	return fcs^0xffff
  
+def convertListToString(listBytes):
+        return ''.join(map(str, listBytes)) #funcao do python pronta para convert listas em string 
