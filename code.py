@@ -61,7 +61,7 @@ def convertListToString(listBytes):
 packageList = ['1A', '80', '12', '00000000', '54494D45522C36302C3336303023', '0001']
 
                
-n = 4    #in my case my retun is with 4 characters 
+n = 4    #in my case my the return is with 4 characters 
 
 checksumData = checksumDataFormat(packageList)  #transformando o package para o modelo de calculo do CRC                
 checksumCalculated = (GetFormattedHex(GetCrc16(checksumData), n))
