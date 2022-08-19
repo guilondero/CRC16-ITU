@@ -1,22 +1,9 @@
-
-packageList = ['78','78','4C','FC','BC','D6','0F','A3','0D,'0A']
-
-               
-n = 4    #in my case my retun is with 4 characters 
-
-checksumData = checksumDataFormat(packageList)  #transformando o package para o modelo de calculo do CRC                
-checksumCalculated = (GetFormattedHex(GetCrc16(checksumData), n))
-
-
-
 def GetFormattedHex(intNum, lenOfHexString):
 	return format(intNum, "0" + str(lenOfHexString) + "x").upper() 
 
-
 def checksumDataFormat(packageList):
-    packageChecksum = packageList[:-4]         #Remove last four bytes (stopBit)
-    packageChecksum = packageChecksum[2:] #remove twos first bytes (startBit)
-    packageChecksum = convertListToString(packageChecksum)  #transforma em uma string o pacote a ser calculado o CRC
+    packageChecksum = convertListToString(packageList)  #transforma em uma string o pacote a ser calculado o CRC
+    print("Package to be calculated CRC: " + packageChecksum)
 	       
     return packageChecksum
 	      
@@ -67,6 +54,16 @@ def GetCrc16(strHexData):
 		fcs = (fcs >> 8) ^ crc16tab[crc16tabIndex]
 		i = i + 2
 	return fcs^0xffff
- 
+    
 def convertListToString(listBytes):
-        return ''.join(map(str, listBytes)) #funcao do python pronta para convert listas em string 
+    return ''.join(map(str, listBytes)) #funcao do python pronta para convert listas em string 
+
+packageList = ['1A', '80', '12', '00000000', '54494D45522C36302C3336303023', '0001']
+
+               
+n = 4    #in my case my retun is with 4 characters 
+
+checksumData = checksumDataFormat(packageList)  #transformando o package para o modelo de calculo do CRC                
+checksumCalculated = (GetFormattedHex(GetCrc16(checksumData), n))
+
+print(checksumCalculated)
